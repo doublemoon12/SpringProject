@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+<!--  annotation 기반으로 Controller 셋팅  -->
+
+<!-- com.springbook.biz 하위의 모든 클래스에서 @(annotation)을 스캔 가능하도록  -->
+<context:component-scan base-package="com.springbook.biz"></context:component-scan>
+
+<!-- MultipartResolver 설정 : 파일 업로드 빈을 셋팅 : <<주의 : 빈이름을 임의로 변경하면 안됨. >> -->
+	<bean id = "mutipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1000000"></property>
+	</bean>
+	
+<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<property name = "exceptionMappings">
+		<props>
+			<prop key= "java.lang.ArithmeticException"> common/arithmeticError.jsp</prop>
+			<prop key= "java.lang.NullPointerException"> common/nullPointError.jsp</prop>
+			<prop key= "java.lang.IllegalArgumentException">common/arithmeticError.jsp </prop>
+		
+		</props>
+	</property>
+	<property name = "defaultErrorView" value = "common/error.jsp"></property>
+</bean>	
+
+</beans>
