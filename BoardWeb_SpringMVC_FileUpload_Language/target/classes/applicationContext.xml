@@ -17,6 +17,8 @@
 	게더링 함 -->
 
 <context:component-scan base-package="com.springbook.biz"></context:component-scan>
+<mvc:annotation-driven></mvc:annotation-driven>
+
 
 <!--  AOP 어노테이션을 검색할 수 있도록 설정  
 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
@@ -59,6 +61,19 @@
 </aop:config>
  -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- DataSource 설정 1.  (기본 셋팅)  : DB 연동 할때 사용 , JDBCTemplate, mybatis , JPA 연동시 사용 
 <bean id= "dataSource" class = "org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	<property name = "driverClassName" value = "org.h2.Driver" />
@@ -67,6 +82,12 @@
 	<property name = "password" value= "" /> 
 </bean>
 -->
+
+
+
+
+
+
 
 <!--  AroundAdvice2 : JoinPoint 와 바인드 변수 적용  
 <bean id = "log" class = "com.springbook.biz.common.AroundAdvice2"></bean>
@@ -84,6 +105,8 @@
 </aop:config>
 -->
 
+
+
 <!--  AfterThrowingAdvice2 : JoinPoint 와 바인드 변수 적용  
 <bean id = "log" class = "com.springbook.biz.common.AfterThrowingAdvice2"></bean>
 -->
@@ -99,6 +122,10 @@
 
 </aop:config>
 -->
+
+
+
+
 
 <!--  AfterReturingAdvice2 : JoinPoint 와 바인드 변수 적용 
 <bean id = "log" class = "com.springbook.biz.common.AfterReturning2"></bean>
@@ -116,6 +143,8 @@
 </aop:config>
 -->
 
+
+
 <!--  BeforeAdvice2 : JoinPoint 와 바인드 변수 적용   
 <bean id = "log" class = "com.springbook.biz.common.BeforeAdvice2"></bean>
 --> 
@@ -130,6 +159,9 @@
 
 </aop:config>
 -->
+
+
+
 
 <!--  
 <bean id = "log" class = "com.springbook.biz.common.AfterThrowingAdvice"></bean>
@@ -146,6 +178,13 @@
 
 </aop:config>
 -->
+
+
+
+
+
+
+
 
 
 
