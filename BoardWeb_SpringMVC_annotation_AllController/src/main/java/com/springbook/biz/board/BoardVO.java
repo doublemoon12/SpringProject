@@ -12,13 +12,13 @@ public class BoardVO {
 	private String content; 
 	private Date regdate; 
 	private int cnt;
-	private String searchCondition;
-	private String searchKeyword;
-	private MultipartFile uploadFile;
+	//private String searchCondition;
+	//private String searchKeyword;
+	//private MultipartFile uploadFile;
 	
 	//getter , setter
 	
-	
+	/*
 	public String getSearchCondition() {
 		return searchCondition;
 	}
@@ -38,6 +38,7 @@ public class BoardVO {
 		this.uploadFile = uploadFile;
 	}
 	
+	*/
 	
 	
 	

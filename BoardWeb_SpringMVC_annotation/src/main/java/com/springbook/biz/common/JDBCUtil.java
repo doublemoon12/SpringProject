@@ -8,13 +8,8 @@ import java.sql.ResultSet;
 public class JDBCUtil {
 	public static Connection getConnection() {
 		try {
-			/*
-			 * Class.forName("org.h2.Driver"); return
-			 * DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
-			 */		
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "HR5", "1234");
-
+			Class.forName("org.h2.Driver");
+					return DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -16,6 +16,7 @@
   	<a href = "login.do"> 로그인</a> <p><p> 
   	<a href = "getBoardList.do">글 목록 바로가기 </a> <p><p>
   	<a href = "dataTransform.do"> 글 목록 변환처리</a>
+	
 
 
 </center>

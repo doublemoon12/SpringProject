@@ -7,44 +7,30 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
 import com.springbook.biz.user.UserVO;
 import com.springbook.biz.user.impl.UserDAO;
 
 @Controller
-@SessionAttributes("board")
 public class BoardController {
-	/*
-	   @SessionAttributes("board") 
-	      BoardVO에서 이전에 설정값을 Session에다가 저장해 두고 새롭게 변경된 항목만 수정 
-	      기존의 저장된 값들은 그대로 유지	      
-	 */	
+
 	 //기능별의 Controller를 통합 : 
-	// 유지 보수를 쉽게 하기 위해서 DAO 객체를 직접 호출하면 안된다. 
-	// 인터페이스를 객체 주입 해서 구현을 해놓아야 유지 보수를 쉽게 할 수 있다. 
-	
-	@Autowired
-	private BoardService boardService;   //인터페이스로 DAO를 호출 
-		//타입은 인터페이스 , 
-	
 	
 	//1. 글등록 
 	@RequestMapping(value="/insertBoard.do")   // 클라이언트 요청 
-	public String insertBoard(BoardVO vo)  {
+	public String insertBoard(BoardVO vo, BoardDAO boardDAO)  {
 		System.out.println("글 등록 처리- Spring MVC 어노테이션 작동 ");
 		
-		boardService.insertBoard(vo);
+		boardDAO.insertBoard(vo);
 		
 		return "getBoardList.do";   //Forward 방식으로 뷰 페이지 전송 
 		 
@@ -53,19 +39,14 @@ public class BoardController {
 	//2.글 수정 
 	
 	@RequestMapping ("/updateBoard.do")
-	public String updateBoard(@ModelAttribute("board") BoardVO vo ) {
+	public String updateBoard(BoardVO vo , BoardDAO boardDAO) {
 		System.out.println("글 수정 처리 - Spring MVC 호출 - Controller 분리");
 		
-		System.out.println("번호 : " + vo.getSeq());
-		System.out.println("제목 : " + vo.getTitle());
-		System.out.println("작성자 : " + vo.getWriter());  //update에서 넘기는 변수가 설정안됨. 
-		System.out.println("내용 : " + vo.getContent());
-		System.out.println("등록일 : " + vo.getRegdate());
-		System.out.println("조회수 : " + vo.getCnt());
-		System.out.println("==============================");
+		System.out.println(vo.getTitle());
+		System.out.println(vo.getContent());
+		System.out.println(vo.getSeq());
 		
-		
-		boardService.updateBoard(vo);     
+		boardDAO.updateBoard(vo);     
 		
 		// 3. 화면 네비게이션
 		
@@ -74,16 +55,15 @@ public class BoardController {
 	
 	//3. 글삭제
 	@RequestMapping("/deleteBoard.do")
-	public String deleteBoard(BoardVO vo ) {
+	public String deleteBoard(BoardVO vo , BoardDAO boardDAO) {
 		System.out.println("글 삭제 처리- Spring MVC 어노테이션 - Controller 통합");
 		
-		boardService.deleteBoard(vo);
+		boardDAO.deleteBoard(vo);
 		return "redirect:getBoardList.do";  //redirect 로 이동 
 		//return "getBoardList.do"; 		//Forward 로 이동
 	}
 	
-	//검색 조건 목록 설정 (Model 객체에 값을 더 추가합니다.Model 객체를 호출하기 전에 먼저 작동되어서 Model 객체에 값을 할당한다. ) 
-	
+	//검색 조건 목록 설정 
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
 		Map<String, String> conditionMap = new HashMap<String, String>(); 
@@ -100,10 +80,10 @@ public class BoardController {
 	
 	//4. 글 상세 검색
 	@RequestMapping ("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model) {
+	public String getBoard(BoardVO vo, BoardDAO boardDAO, Model model) {
 		System.out.println("글 상세 조회 처리- Spring MVC 호출 - Controller 통합");		
 				 		 
-		 model.addAttribute("board", boardService.getBoard(vo)); 
+		 model.addAttribute("board", boardDAO.getBoard(vo)); 
 		
 		 return "getBoard.jsp"; 
 		 
@@ -118,7 +98,7 @@ public class BoardController {
 	@RequestMapping("/getBoardList.do")
 	public String getBoardList(@RequestParam (value="searchCondition", defaultValue="TITLE", required=false)
 			String condition, @RequestParam (value="searchKeyword", defaultValue="", required=false) String keyword,
-			BoardVO vo, Model model, HttpServletRequest req) {
+			BoardVO vo, BoardDAO boardDAO, Model model, HttpServletRequest req) {
 		System.out.println("글 목록 검색 처리 -- Spring MVC 어노테이션 작동  Controller 통합 ");
 		
 		System.out.println("검색 조건 : " + condition);
@@ -131,7 +111,7 @@ public class BoardController {
 		System.out.println("검색 단어 : " + keyword2);
 
 		
-		model.addAttribute("boardList", boardService.getBoardList(vo)); 
+		model.addAttribute("boardList", boardDAO.getBoardList(vo)); 
 		
 		return "getBoardList.jsp";	 
 	}

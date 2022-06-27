@@ -10,12 +10,6 @@
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-  
-  <welcom-file-list>
-  	<welcome-file>login.jsp</welcome-file>
-  	<welcome-file>default.jsp</welcome-file>
-  	<welcome-file>index.jsp</welcome-file>
-  </welcom-file-list>
 
 
 </web-app>

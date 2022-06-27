@@ -6,36 +6,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 //@ControllerAdvice("com.springbook.view")
 public class CommonExceptionHandler {
-	
-	//@ExceptionHandler(IllegalArgumentException.class)
-	public ModelAndView handlerIllegalArgumentException (Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e); 
-		mav.setViewName("/common/arithmeticError.jsp");
-		return mav; 
-	}
-
-	//@ExceptionHandler(ArithmeticException.class)
-	public ModelAndView handleArithmetdicException(Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e);
-		mav.setViewName("/common/arithmeticError.jsp");			
-		return mav;
-	}
-	//@ExceptionHandler(NullPointerException.class)
-	public ModelAndView handleNullPointException(Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e);
-		mav.setViewName("/common/nullPointError.jsp");
-		return mav;
-	}
-	//@ExceptionHandler(Exception.class)
-	public ModelAndView handleException(Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e);
-		mav.setViewName("/common/error.jsp");
-		return mav;
-	}
+    /*
+     * //@ExceptionHandler(IllegalArgumentException.class) public ModelAndView
+     * handlerIllegalArgumentException (Exception e) { ModelAndView mav = new
+     * ModelAndView(); mav.addObject("exception", e);
+     * mav.setViewName("/common/arithmeticError.jsp"); return mav; }
+     * 
+     * //@ExceptionHandler(ArithmeticException.class) public ModelAndView
+     * handleArithmetdicException(Exception e) { ModelAndView mav = new
+     * ModelAndView(); mav.addObject("exception", e);
+     * mav.setViewName("/common/arithmeticError.jsp"); return mav; }
+     * //@ExceptionHandler(NullPointerException.class) public ModelAndView
+     * handleNullPointException(Exception e) { ModelAndView mav = new
+     * ModelAndView(); mav.addObject("exception", e);
+     * mav.setViewName("/common/nullPointError.jsp"); return mav; }
+     * //@ExceptionHandler(Exception.class) public ModelAndView
+     * handleException(Exception e) { ModelAndView mav = new ModelAndView();
+     * mav.addObject("exception", e); mav.setViewName("/common/error.jsp"); return
+     * mav; }
+     */
 	
 	
 	
